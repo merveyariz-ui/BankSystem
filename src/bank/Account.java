@@ -63,4 +63,9 @@ public abstract class Account implements Transferable {
     public String getAccountNumber() {
         return accountNumber;
     }
+ // Alt sınıfların (Checking, Savings, Credit) bakiyeyi değiştirebilmesi için:
+    protected void decreaseBalance(double amount) {
+        this.balance -= amount;
+        addTransaction("Para Çekme", -amount); // Otomatik kayıt
+    }
 }
