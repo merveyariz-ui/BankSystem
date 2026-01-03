@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class Account implements Transferable {
     
     private String accountNumber;
-    private double balance;
+    protected double balance;
     private String ownerName;
     private List<Transaction> transactionHistory; // Geçmiş listesi
 
@@ -63,7 +63,6 @@ public abstract class Account implements Transferable {
     public String getAccountNumber() {
         return accountNumber;
     }
- // Alt sınıfların (Checking, Savings, Credit) bakiyeyi değiştirebilmesi için:
     protected void decreaseBalance(double amount) {
         this.balance -= amount;
         addTransaction("Para Çekme", -amount); // Otomatik kayıt
