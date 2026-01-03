@@ -24,6 +24,7 @@ public class Main {
             System.out.println("4. Para Yatır");
             System.out.println("5. Para Çek");
             System.out.println("6. Müşterileri Listele");
+            System.out.println("7. Para Transferi");
             System.out.println("0. Çıkış");
             System.out.print("Seçiminiz: ");
             
@@ -98,6 +99,42 @@ public class Main {
 
                 case 6: // Listele
                     myBank.listCustomers();
+                    break;
+                    
+                case 7: // Para Transferi
+                    if (activeAccount == null) {
+                        System.out.println("Transfer yapmak için önce bir hesaba giriş yapmalısınız (Seçenek 3)!");
+                        break;
+                    }
+                    
+                    System.out.println("--- Kime para göndereceksiniz? ---");
+                    myBank.listCustomers(); // Müşterileri listeliyoruz ki sırasını görelim
+                    
+                    System.out.print("Alıcı Müşterinin Sıra Numarasını Giriniz (0, 1, 2...): ");
+                    int receiverIndex = scanner.nextInt();
+                    
+                    // Bankadan o müşteriyi buluyoruz
+                    Customer receiver = myBank.getCustomer(receiverIndex);
+                    
+                    if (receiver != null) {
+                        // Basitlik olsun diye alıcının İLK hesabını seçiyoruz
+                        if (receiver.getAccounts().size() > 0) {
+                            Account receiverAccount = receiver.getAccounts().get(0);
+                            
+                            System.out.print("Gönderilecek Tutar: ");
+                            double transferAmount = scanner.nextDouble();
+                            
+                            // Account sınıfındaki transfer metodunu kullanıyoruz
+                            boolean success = activeAccount.transfer(receiverAccount, transferAmount);
+                            if(success) {
+                                System.out.println("Transfer Başarılı!");
+                            }
+                        } else {
+                            System.out.println("Bu müşterinin aktif bir hesabı yok.");
+                        }
+                    } else {
+                        System.out.println("Hatalı müşteri seçimi!");
+                    }
                     break;
 
                 case 0:

@@ -30,4 +30,11 @@ public class Bank {
     public String getBankName() {
         return bankName;
     }
+    public Customer getCustomer(int index) {
+        // Girilen numara listenin sınırları içinde mi diye kontrol ediyoruz
+        if (index >= 0 && index < customers.size()) {
+            return customers.get(index);
+        }
+        return null; // Eğer geçersiz bir numara girerse boş döner
+    }
 }
