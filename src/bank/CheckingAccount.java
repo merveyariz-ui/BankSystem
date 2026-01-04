@@ -7,8 +7,8 @@ public class CheckingAccount extends Account {
 
     @Override
     public void withdraw(double amount) {
-        if (getBalance() >= amount) {
-            System.out.println("Vadesiz hesaptan " + amount + " TL çekildi.");
+    	if (this.balance >= amount) {
+    		decreaseBalance(amount);
             // Gerçek bakiye düşme işlemi Account sınıfı üzerinden yapılır.
         } else {
             System.out.println("Yetersiz bakiye.");
